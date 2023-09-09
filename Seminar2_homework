@@ -1,0 +1,30 @@
+import random
+
+# Пирамидальная сортировка массива
+
+def heap_sort(array: list):
+    for i in range(len(array), -1, -1):
+        heapify(array, len(array), i)
+    for i in range(len(array)-1, 0, -1):
+        array[0], array[i] = array[i], array[0]
+        heapify(array, i, 0)
+    return array
+    
+def heapify(array: list, heap_size: int, root_index: int):
+    largest = root_index
+    left_child = 2 * root_index + 1
+    rigth_child = 2 * root_index + 2
+    
+    if(left_child < heap_size and array[left_child] > array[largest]):
+        largest = left_child
+    if(rigth_child < heap_size and array[rigth_child] > array[largest]):
+        largest = rigth_child
+    if(largest != root_index):
+        array[root_index], array[largest] = array[largest], array[root_index]
+        heapify(array, heap_size, largest)
+        
+new_list = [random.randint(-100, 100) for i in range(12)] 
+print(new_list)
+print(heap_sort(new_list))
+
+
